@@ -20,7 +20,7 @@ app.use(cors());
 
 // Initialize the main project folder
 app.use(express.static('website'));
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Setup Server
 const server = app.listen(port, listening);
@@ -46,18 +46,16 @@ function getNewData(req,res) {
 app.post('/addData', addWeather);
 
 function addWeather(req,res) {
-    console.log(req.body)
-    projectData["date"] = req.body.data.date;
-    projectData["temp"] = req.body.data.temp;
-    projectData["feel"] = req.body.data.feeling;
+    console.log("req.body ~> ",req.body)
+    projectData.data = req.body.data;
+    projectData.temp = req.body.temp;
+    projectData.feel = req.body.feel;
+
+    // projectData["date"] = req.body.date;
+    // projectData["temp"] = req.body.temp;
+    // projectData["feel"] = req.body.feel;
     
     res.send(projectData)
-    console.log(projectData)
+    console.log("projectData ~>",projectData)
 
-    // newEntry = {
-    //     data: req.body.data,
-    //     temp: req.body.temp,
-    //     content:req.body.content
-    // }
-    
 }
