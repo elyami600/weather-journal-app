@@ -20,15 +20,15 @@ document.getElementById('generate').addEventListener('click',perforAction);
 /* Function called by event listener */
 function perforAction(e) {
     const $zipCode  = document.getElementById('zip').value;
-    const $feeling = document.getElementById('feelings').value
+    const $feeling  = document.getElementById('feelings').value
 
     getWheaterData($zipCode)
     .then(data => {
-        console.log(data)
-        postData('/addData',{data: newDate, temp: data.temp, feel: $feeling})
+        console.log("data ~>",data)
+        postData("http://localhost:3000/addData", {data: newDate, temp: data.main.temp, feel: $feeling});
 
+        updataUI()
     
-
     });
 }
 
@@ -72,3 +72,19 @@ const postData = async ( url = '', data = {}) => {
 
 
 /* Function to GET Project Data */
+const updataUI = async () => { 
+    const request = await fetch('http://localhost:3000/allData')
+
+
+    try {
+        const allData =await request.json();
+        console.log('allData', allData)
+        document.getElementById('date').innerHTML    = allData.data;
+        document.getElementById('temp').innerHTML    = allData.temp;
+        document.getElementById('content').innerHTML = allData.feel;
+
+
+    }catch(error) {
+        console.log('error ', error)
+    }
+}
