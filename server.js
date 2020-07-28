@@ -47,19 +47,19 @@ app.post('/addData', addWeather);
 
 function addWeather(req,res) {
     console.log("req.body ~> ",req.body)
-    if(req.body) {
-        console.log("got here")
-        projectData = req.body;
-    }
-    // projectData.data = req.body.data;
-    // projectData.temp = req.body.temp;
-    // projectData.feel = req.body.feel;
+    // if(req.body) {
+    //     console.log("got here")
+    //     projectData = req.body;
+    // }
+    projectData.data = req.body.data;
+    projectData.temp = req.body.temp;
+    projectData.feel = req.body.feel;
 
     // projectData["date"] = req.body.date;
     // projectData["temp"] = req.body.temp;
     // projectData["feel"] = req.body.feel;
     
-    // res.send({wepa: 100})
+    res.send(projectData)
     console.log("projectData ~>",projectData)
 
 }
