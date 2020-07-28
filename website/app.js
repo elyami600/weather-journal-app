@@ -77,10 +77,10 @@ const updataUI = async () => {
 
 
     try {
-        const allData =await request.json();
+        const allData = await request.json();
         console.log('allData', allData)
-        document.getElementById('date').innerHTML    = allData.data;
-        document.getElementById('temp').innerHTML    = allData.temp;
+        document.getElementById('date').innerHTML    = `${allData.data} `;
+        document.getElementById('temp').innerHTML    = `${Math.round(allData.temp)} °F`;
         document.getElementById('content').innerHTML = allData.feel;
 
 
